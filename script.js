@@ -1,13 +1,20 @@
+// Each exercise has it's own function
+// I made it so user can type inside each form,
+// and then press the button to see the results.
+// Each exercise may be changed in the way to log the result in console,
+// but i thought, this way it's gonna be better.
 document.addEventListener("DOMContentLoaded", function() {
-    initExponentiation();
-    initPromo();
-    initCreditCalculator();
+    initExponentiation(); // 5.10.1
+    initPromo(); // 5.10.2
+    initAge(); // 5.10.3
+    initAge2(); // 5.10.4
+    initCreditCalculator(); // 5.10.5
 });
 
 // Validation for Exponentiation
 function validateInput(value) {
     if (!value || value.trim() === '') {
-        return {isValid: false, message: "Пожалуйста, сначала заполните все поля"};
+        return {isValid: false, message: "Пожалуйста, заполните поле"};
     }
 
     const num = Number(value);
@@ -19,6 +26,7 @@ function validateInput(value) {
     return {isValid: true, value: num};
 }
 
+// 5.10.1
 function initExponentiation() {
     const exponentiation = document.getElementById('expForm');
     const resultExp = document.getElementById('resultExp');
@@ -48,6 +56,7 @@ function initExponentiation() {
     }
 };
 
+// 5.10.2
 function initPromo() {
     const promoForm = document.getElementById('promoForm');
     const resultPromo = document.getElementById('resultPromo');
@@ -70,7 +79,6 @@ function initPromo() {
                 return;
             }
 
-            // Function Execution
             if (enteredCode.toLowerCase() === validPromoCode.toLowerCase()) {
                 resultPromo.textContent = "Промокод применён";
                 resultPromo.style.color = "green";
@@ -84,6 +92,113 @@ function initPromo() {
     }
 };
 
+// 5.10.3
+function initAge() {
+    const ageForm = document.getElementById('ageForm');
+    const resultAge = document.getElementById('resultAge');
+
+    if(ageForm) {
+        ageForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            //Get Form Data
+            const inputName = document.getElementById('inputName').value;
+            const inputDate = document.getElementById('inputDate').value;
+            const currentYear = 2026;
+
+            // Validation
+            const validationAge = validateInput(inputDate);
+
+            if (!validationAge.isValid) {
+                resultAge.textContent = validationAge.message;
+                return;
+            }
+            if (!inputName || inputName.trim() === '') {
+                resultAge.textContent = 'Пожалуйста, введите данные';
+                resultAge.style.color = 'red';
+                return;
+            }            
+            if (!inputDate || inputDate.trim() === '') {
+                resultAge.textContent = 'Пожалуйста, введите данные';
+                resultAge.style.color = 'red';
+                return;
+            }
+            if (inputDate >= currentYear) {
+                resultAge.textContent = 'Укажите действительный год рождения';
+                resultAge.style.color = 'red';
+                return;
+            }
+            
+            // Function Executuion
+            if (inputDate !== null) {
+                resultAge.textContent = `${inputName}, возвраст - ${currentYear - inputDate}`;
+                resultAge.style.color = 'black';
+            }
+
+            ageForm.reset();
+        })
+    }
+};
+
+// 5.10.4
+function initAge2() {
+    const ageForm2 = document.getElementById('ageForm2');
+    const resultAge2 = document.getElementById('resultAge2');
+
+    if(ageForm2) {
+        ageForm2.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            //Get Form Data
+            const inputName2 = document.getElementById('inputName2').value;
+            const inputDate2 = document.getElementById('inputDate2').value;
+            const currentYear = 2026;
+            const userAge = currentYear - inputDate2;
+
+            // Validation
+            const validationAge2 = validateInput(inputDate2);
+
+            if (!validationAge2.isValid) {
+                resultAge2.textContent = validationAge2.message;
+                return;
+            }
+            if (!inputName2 || inputName2.trim() === '') {
+                resultAge2.textContent = 'Пожалуйста, введите данные';
+                resultAge2.style.color = 'red';
+                return;
+            }            
+            if (!inputDate2 || inputDate2.trim() === '') {
+                resultAge2.textContent = 'Пожалуйста, введите данные';
+                resultAge2.style.color = 'red';
+                return;
+            }
+            if (inputDate2 >= currentYear) {
+                resultAge2.textContent = 'Укажите действительный год рождения';
+                resultAge2.style.color = 'red';
+                return;
+            }
+            
+            // Function Executuion
+            let x = userAge % 10;
+
+            if (x == 1) {
+                resultAge2.textContent = `${inputName2}, возраст - ${userAge} год`;
+                resultAge2.style.color = 'black';
+            } else if (x > 1 && x < 5) {
+                resultAge2.textContent = `${inputName2}, возраст - ${userAge} года`;
+                resultAge2.style.color = 'black';
+            } else {
+                resultAge2.textContent = `${inputName2}, возраст - ${userAge} лет`;
+                resultAge2.style.color = 'black';
+            }
+            // Для 11 лет пока не придумал условие
+
+            ageForm2.reset();
+        });
+    }
+};
+
+// 5.10.5
 function initCreditCalculator() {
     const creditForm = document.getElementById('creditForm');
     const birthDateInput = document.getElementById('birthDate');
@@ -97,8 +212,8 @@ function initCreditCalculator() {
 
             loanAmountInput.required = false;
 
-            // Проверка ввода данных 
-            // Получение даты рождения пользователя
+            // Validation for input data
+            // Get user birth date
             const birthDateValue = birthDateInput.value;
 
             if (!birthDateValue) {
@@ -113,14 +228,15 @@ function initCreditCalculator() {
                 return;
             }
 
-            // Расчёт возраста и проверка максимальной суммы
+            // Validation for user age calculation
             const age = calculateAge(birthDate);
 
             if (isNaN(age)) {
                 showResult('Ошибка при расчете возраста', 'error');
                 return;
             }
-
+            
+            // Validation of maximum amount
             const creditInfo = getMaxCreditAmount(age);
 
             if (!creditInfo.approved) {
@@ -131,7 +247,7 @@ function initCreditCalculator() {
                 return;
             }
 
-            // Отображение поля для ввода суммы
+            // Showing input amount
             amountGroup.style.display = 'block';
             loanAmountInput.disabled = false;
             showResult(creditInfo.message, 'success');
@@ -141,7 +257,7 @@ function initCreditCalculator() {
             }
         });
 
-        // Расчёт суммы после ввода
+        // Validation for input amount
         loanAmountInput.addEventListener('input', function() {
             if (!this.disabled && birthDateInput.value) {
                 const birthDate = new Date(birthDateInput.value);
@@ -158,7 +274,7 @@ function initCreditCalculator() {
         });
     }
 
-    // Функция расчёта возраста
+    // Age calculation function
     function calculateAge(birthDate) {
         if (!(birthDate instanceof Date) || isNaN(birthDate.getTime())) {
             return NaN;
@@ -168,14 +284,14 @@ function initCreditCalculator() {
         let age = today.getFullYear() - birthDate.getFullYear();
         const monthDiff = today.getMonth() - birthDate.getMonth();
 
-        // Если день рождения ещё не был в этом году
+        // If the birthday was not yet this year
         if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
             age--;
         }
         return age;
     }
 
-    // Функция определения максимальной суммы кредита
+    // Function for max amount
     function getMaxCreditAmount(age) {
         if (isNaN(age)) {
             return {
@@ -215,7 +331,7 @@ function initCreditCalculator() {
         }
     }
 
-    // Функция округления до ближайшего числа, кратного 1000
+    // Function for rounding numbers
     function roundToNearestThousand(amount,maxAmount) {
         amount = Number(amount);
 
@@ -236,7 +352,7 @@ function initCreditCalculator() {
         return roundedAmount;
     }
 
-    // Функция проверки введённой суммы кредита
+    // Function for comparison input amount and max amount
     function checkLoanAmount(amount, maxAmount) {
         amount = Number(amount);
 
@@ -269,7 +385,7 @@ function initCreditCalculator() {
         return true;
     }
 
-    // Функция отображения результата
+    // Result display function
     function showResult(message, type) {
         resultCredit.textContent = message;
         resultCredit.className = `result ${type}`;
