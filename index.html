@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="logo.svg" type="image/x-icon">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="exercise" id="exercise">
+            <h1 class="exercise__title">Задание 5.10.1</h1>
+            <p class="exercise__text">возведение в степень</p>
+            <div class="exponentiation">
+                <div class="form">
+                    <form id="expForm">                        
+                        <div class="form__text">Введите число в поле, затем нажмите кнопку "<span class="form__text-accent">Возвести в степень</span>"</div>
+                        <div class="form-group">
+                            <input type="text" id="inputNumber" placeholder="Введите число">
+                        </div>                
+                        <div class="form__result" id="resultExp"></div>
+                        <button id="expSubmit" type="submit" class="submit-btn">Возвести в степень</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="exercise" id="exercise">
+            <h1 class="exercise__title">Задание 5.10.2</h1>
+            <p class="exercise__text">проверка промокода</p>
+            <div class="promo">
+                <div class="form">
+                    <form id="promoForm">                        
+                        <div class="form__text">Введите промокод в поле и нажмите кнопку "<span class="form__text-accent">Проверить промокод</span>"</div>
+                        <div class="form-group">
+                            <input type="text" id="inputPromo" placeholder="Введите промокод">
+                        </div>                
+                        <div class="form__result" id="resultPromo"></div>
+                        <button id="promoSubmit" type="submit" class="submit-btn">Проверить промокод</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="exercise" id="exercise">
+            <h1 class="exercise__title">Задание 5.10.3</h1>
+            <p class="exercise__text">рассчет возраста</p>
+            <div class="age">
+                <div class="form">
+                    <form id="ageForm">                        
+                        <div class="form__text">Введите в поле имя и год рождения и нажмите кнопку "<span class="form__text-accent">Рассчитать</span>"</div>
+                        <div class="form-group">
+                            <input type="text" id="inputName" placeholder="Имя">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" id="inputDate" placeholder="Дата рождения">
+                        </div>
+                        <p class="form__result" id="resultAge"></p>
+                        <button id="ageSubmit" type="submit" class="submit-btn">Рассчитать</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="exercise" id="exercise">
+            <h1 class="exercise__title">Задание 5.10.4</h1>
+            <p class="exercise__text">рассчет возраста + логика вывода данных</p>
+            <div class="age2">
+                <div class="form">
+                    <form id="ageForm2">                        
+                        <div class="form__text">Введите в поле имя и год рождения и нажмите кнопку "<span class="form__text-accent">Рассчитать</span>"</div>
+                        <div class="form-group">
+                            <input type="text" id="inputName2" placeholder="Имя">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" id="inputDate2" placeholder="Дата рождения">
+                        </div>
+                        <p class="form__result" id="resultAge2"></p>
+                        <button id="ageSubmit2" type="submit" class="submit-btn">Рассчитать</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="exercise" id="exercise">
+            <h1 class="exercise__title">Задание 5.10.5</h1>
+            <p class="exercise__text">Кредитный калькулятор</p>
+            <div class="info-box">
+                <h3>Условия кредита:</h3>
+                <ul>
+                    <li>если клиенту нет 18 лет, то кредит он не получит</li>
+                    <li>если клиенту от 18 до 21, то он может получить максимум 50000</li>
+                    <li>если клиенту от 22 до 35, то он сможет получить максимум 400000</li>
+                    <li>если клиенту от 36 до 65, то ему одобрят максимум 1000000</li>
+                    <li>кредит могут выдавать суммами кратными 10000.</li>
+                </ul>
+            </div>
+            <div class="credit-calculator">
+                <div class="form">
+                    <form id="creditForm" novalidate>                        
+                        <div class="form__text">Введите ваше имя и дату рождения и нажмите кнопку "<span class="form__text-accent">Рассчитать</span>"</div>
+                        <div class="form-group">
+                            <label for="birthDate">Дата рождения:</label>
+                            <input type="date" id="birthDate">
+                        </div>
+                        <div class="form-group" id="amountGroup">
+                            <label for="loanAmount">Желаемая сумма кредита:</label>
+                            <input type="number" id="loanAmount" step="1000" min="1000" placeholder="Например: 50000" disabled>
+                        </div>
+                        <button id="CreditSubmitBase" type="submit" class="submit-btn">Рассчитать</button>
+                        <div class="form__result" id="resultCredit"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer__box">
+            <a href="https://knopchhq.github.io/profile/" class="footer-text">© <span id="currentYear"></span> Alexander — Frontend Developer • Built with ❤️</a>
+        </div>
+    </footer>
+</body>
+</html>
